@@ -4,12 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import hillclimbing.State;
-
-public class SudokuState extends State {
+public class SudokuState {
 	
-	private int size;
-	private int[][] matrix;
+	public int size;
+	public int[][] matrix;
 	
 	public SudokuState(int n) {
 		this.size = n;
@@ -47,25 +45,6 @@ public class SudokuState extends State {
 		} catch (IOException e) {
 			System.out.println("Erro ao ler o arquivo '"+fileName+"'.");
 		}
-	}
-
-	public int getSize() {
-		return size;
-	}
-
-	public int[][] getMatrix() {
-		return matrix;
-	}
-	
-	@Override
-	protected SudokuState clone() {
-		SudokuState cloneState = new SudokuState(size);
-		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++) {
-				cloneState.getMatrix()[i][j] = matrix[i][j];
-			}
-		}
-		return cloneState;
 	}
 
 }
