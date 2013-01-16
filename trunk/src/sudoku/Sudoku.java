@@ -48,5 +48,15 @@ public class Sudoku {
 			System.out.println("Erro ao ler o arquivo '"+fileName+"'.");
 		}
 	}
+	
+	public Sudoku clone() {
+		Sudoku sudokuClone = new Sudoku(this.size);
+		
+		for (int i = 0; i < this.sizeSquare; i++)
+			for (int j = 0; j < this.sizeSquare; j++)
+				sudokuClone.matrix[i][j] = this.matrix[i][j];
+		
+		return sudokuClone;
+	}
 
 }
