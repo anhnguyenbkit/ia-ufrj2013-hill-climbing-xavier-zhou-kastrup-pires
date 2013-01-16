@@ -11,7 +11,8 @@ public class Main {
 		
 		Scanner scanner = new Scanner(System.in);
 		Sudoku sudoku = new Sudoku(scanner.nextLine());
-		SudokuSolver finalState = new SudokuSolver(sudoku);
+		SudokuSolver solver = new SudokuSolver(sudoku);
+		Sudoku finalSudoku = solver.solve();
 		
 	}
 	
