@@ -11,17 +11,17 @@ public class SudokuSolver {
 	public int heuristic(Sudoku state) {
 		int conflicts = 0;
 		
-		for (int i = 0; i < state.sideSize; i++) {
-			int[] val = new int[state.sideSize];
-			for (int j = 0; j < state.sideSize; j++) {
+		for (int i = 0; i < state.sizeSquare; i++) {
+			int[] val = new int[state.sizeSquare];
+			for (int j = 0; j < state.sizeSquare; j++) {
 				if (++val[state.matrix[i][j] - 1] > 1)
 					conflicts++;
 			}
 		}
 
-		for (int i = 0; i < state.sideSize; i++) {
-			int[] val = new int[state.sideSize];
-			for (int j = 0; j < state.sideSize; j++) {
+		for (int i = 0; i < state.sizeSquare; i++) {
+			int[] val = new int[state.sizeSquare];
+			for (int j = 0; j < state.sizeSquare; j++) {
 				if (++val[state.matrix[j][i] - 1] > 1)
 					conflicts++;
 			}
@@ -29,7 +29,7 @@ public class SudokuSolver {
 		
 		for (int i = 0; i < state.size; i++) {
 			for (int j = 0; j < state.size; j++) {
-				int[] val = new int[state.sideSize];
+				int[] val = new int[state.sizeSquare];
 				for (int k = state.size*i; k < state.size*(i+1); k++) {
 					for (int l = state.size*j; l < state.size*(j+1); j++) {
 						if (++val[state.matrix[k][l] - 1] > 1)
