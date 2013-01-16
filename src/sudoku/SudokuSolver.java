@@ -2,18 +2,18 @@ package sudoku;
 
 public class SudokuSolver {
 	
-	SudokuState initialState;
+	Sudoku initialState;
 	
-	public SudokuSolver(SudokuState initialState) {
+	public SudokuSolver(Sudoku initialState) {
 		this.initialState = initialState;
 	}
 
-	public int heuristic(SudokuState state) {
+	public int heuristic(Sudoku state) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public SudokuState solve() {
+	public Sudoku solve() {
 		// TODO Auto-generated method stub
 		return null;
 	}

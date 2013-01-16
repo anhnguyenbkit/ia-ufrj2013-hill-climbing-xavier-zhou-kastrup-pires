@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 import sudoku.SudokuSolver;
-import sudoku.SudokuState;
+import sudoku.Sudoku;
 
 public class Main {
 
@@ -10,7 +10,7 @@ public class Main {
 		System.out.println("Digite o caminho de entrada: ");
 		
 		Scanner scanner = new Scanner(System.in);
-		SudokuState state = new SudokuState(scanner.nextLine());
+		Sudoku state = new Sudoku(scanner.nextLine());
 		SudokuSolver finalState = new SudokuSolver(state);
 		
 	}
