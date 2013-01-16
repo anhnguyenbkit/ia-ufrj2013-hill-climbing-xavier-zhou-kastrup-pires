@@ -10,8 +10,8 @@ public class Main {
 		System.out.println("Digite o caminho de entrada: ");
 		
 		Scanner scanner = new Scanner(System.in);
-		Sudoku state = new Sudoku(scanner.nextLine());
-		SudokuSolver finalState = new SudokuSolver(state);
+		Sudoku sudoku = new Sudoku(scanner.nextLine());
+		SudokuSolver finalState = new SudokuSolver(sudoku);
 		
 	}
 	
