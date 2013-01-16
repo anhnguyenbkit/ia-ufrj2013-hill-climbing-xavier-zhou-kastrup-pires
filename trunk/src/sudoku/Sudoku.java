@@ -4,17 +4,17 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class SudokuState {
+public class Sudoku {
 	
 	public int size;
 	public int[][] matrix;
 	
-	public SudokuState(int n) {
+	public Sudoku(int n) {
 		this.size = n;
 		this.matrix = new int[size][size];
 	}
 	
-	public SudokuState(String fileName) {
+	public Sudoku(String fileName) {
 		try {
 			FileReader fileReader = new FileReader(fileName);
 			BufferedReader input = new BufferedReader(fileReader);
