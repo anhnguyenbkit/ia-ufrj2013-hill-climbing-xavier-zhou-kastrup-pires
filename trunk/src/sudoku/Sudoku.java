@@ -7,6 +7,7 @@ import java.io.IOException;
 public class Sudoku {
 	
 	public int size;
+	public int size2;
 	public int[][] matrix;
 	
 	public Sudoku(int n) {
@@ -26,7 +27,8 @@ public class Sudoku {
 				throw new IllegalStateException("Formato de arquivo inválido.");
 			}
 			this.size = Integer.parseInt(split[0]);
-			this.matrix = new int[size][size];
+			this.size2 = this.size * this.size;
+			this.matrix = new int[size2][size2];
 			
 			while (input.ready()) {
 				inputLine = input.readLine();
