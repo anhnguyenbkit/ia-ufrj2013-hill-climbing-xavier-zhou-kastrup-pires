@@ -1,22 +1,21 @@
 package sudoku;
 
 import hillclimbing.HillClimbingSolver;
-import hillclimbing.State;
 
 public class SudokuSolver extends HillClimbingSolver<SudokuState> {
 	
-	public SudokuSolver(State initialState) {
+	public SudokuSolver(SudokuState initialState) {
 		super(initialState);
 	}
 
 	@Override
-	public Integer heuristic(State state) {
+	public int heuristic(SudokuState state) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
-	public State getNextState(State state) {
+	public SudokuState solve() {
 		// TODO Auto-generated method stub
 		return null;
 	}
