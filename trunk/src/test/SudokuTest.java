@@ -68,7 +68,6 @@ public class SudokuTest {
 		heuristicTest(0, "test/Hard_output.txt");
 		heuristicTest(0, "test/Normal_output.txt");
 		heuristicTest(0, "test/SuperHard_output.txt");
-		heuristicTest(0, "test/test_output.txt");
 		heuristicTest(0, "test/Average4x4_output.txt");
 		heuristicTest(0, "test/Easy4x4_output.txt");
 		heuristicTest(0, "test/Hard4x4_output.txt");
