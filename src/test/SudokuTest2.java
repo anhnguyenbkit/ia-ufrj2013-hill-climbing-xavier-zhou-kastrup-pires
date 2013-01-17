@@ -5,12 +5,12 @@ import java.io.IOException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import sudoku.Sudoku;
-import sudoku.SudokuSolver;
+import sudoku.Sudoku2;
+import sudoku.SudokuSolver2;
 
-public class SudokuTest {
+public class SudokuTest2 {
 
-	ClassLoader classLoader = SudokuTest.class.getClassLoader();
+	ClassLoader classLoader = SudokuTest2.class.getClassLoader();
 
 	@Test
 	public void sudokuTestEasyN2() throws IOException {
@@ -81,13 +81,13 @@ public class SudokuTest {
 	public void testExample(String inputFile, String outputFile) throws IOException{
 		
 		String fileIn = classLoader.getResource(inputFile).getFile();
-		Sudoku sudokuIn = Sudoku.readSudoku(fileIn);
+		Sudoku2 sudokuIn = Sudoku2.readSudoku(fileIn);
 
 		String fileOut = classLoader.getResource(outputFile).getFile();
-		Sudoku sudokuOut = Sudoku.readSudoku(fileOut);
+		Sudoku2 sudokuOut = Sudoku2.readSudoku(fileOut);
 		
-		SudokuSolver solver = new SudokuSolver(sudokuIn);
-		Sudoku sudokuSolution = solver.solve();
+		SudokuSolver2 solver = new SudokuSolver2(sudokuIn);
+		Sudoku2 sudokuSolution = solver.solve();
 		Assert.assertEquals(sudokuOut, sudokuSolution);
 	}
 	
@@ -113,7 +113,7 @@ public class SudokuTest {
 	
 	private void heuristicTest(int value, String path) throws IOException {
 		String solutionFile1 = classLoader.getResource(path).getFile();
-		Sudoku sudokuSolution1 = Sudoku.readSudoku(solutionFile1);
-		Assert.assertEquals(value, SudokuSolver.heuristic(sudokuSolution1));
+		Sudoku2 sudokuSolution1 = Sudoku2.readSudoku(solutionFile1);
+		Assert.assertEquals(value, SudokuSolver2.heuristic(sudokuSolution1));
 	}
 }

@@ -63,6 +63,9 @@ public class SudokuSolver {
 	}
 
 	public Sudoku solve() {
+		System.out.println("Problema:");
+		System.out.println(initialSudoku);
+		
 		Sudoku sudoku = null;
 		int countLoops = 0;
 
@@ -107,8 +110,13 @@ public class SudokuSolver {
 			}
 			
 			if (conflicts == 0) {
-				System.out.println("Resolvido!");
-				System.out.println("Precisou rodar o algoritmo " + countLoops + " vezes.");
+				System.out.println("Solução:");
+				System.out.println(sudoku);
+				if (countLoops == 1) {
+					System.out.println("Precisou rodar o algoritmo " + countLoops + " vez.");					
+				} else {
+					System.out.println("Precisou rodar o algoritmo " + countLoops + " vezes.");
+				}
 				break;
 			}
 		}
