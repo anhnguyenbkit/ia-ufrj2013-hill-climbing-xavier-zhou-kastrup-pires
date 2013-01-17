@@ -15,7 +15,7 @@ public class Sudoku2 extends Sudoku {
 				if (matrix[i][j] != 0) {
 					for (int k = 0; k < this.sizeSquare; k++) {
 						
-					}					
+					}
 				}
 			}
 		}
