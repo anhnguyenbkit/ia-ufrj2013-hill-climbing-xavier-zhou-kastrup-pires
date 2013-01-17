@@ -29,4 +29,33 @@ public class SudokuTest {
 		
 	}
 	
+	@Test
+	public void heuristicsTest() throws IOException {
+		
+		Scanner scanner = new Scanner(System.in);
+		
+		System.out.println("Caminho do arquivo para testar a heurística: ");
+		Sudoku solutionExample = Sudoku.readSudoku(scanner.nextLine());
+		
+		SudokuSolver solver = new SudokuSolver(solutionExample);
+		int foundConflicts = solver.heuristic(solutionExample);
+		
+		Assert.assertEquals(foundConflicts, 0);
+		
+	}
+	
+	@Test
+	public void heuristicsContradictionTest() throws IOException {
+		
+		Scanner scanner = new Scanner(System.in);
+		
+		System.out.println("Caminho do arquivo para testar a heurística: ");
+		Sudoku solutionWrongExample = Sudoku.readSudoku(scanner.nextLine());
+		
+		SudokuSolver solver = new SudokuSolver(solutionWrongExample);
+		int foundConflicts = solver.heuristic(solutionWrongExample);
+		
+		Assert.assertEquals(foundConflicts, 6);
+		
+	}
 }
