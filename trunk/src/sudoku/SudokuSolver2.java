@@ -48,23 +48,27 @@ public class SudokuSolver2 extends SudokuSolver {
 			while (conflicts != 0) {
 				for (int i = 0; i < sudoku.sizeSquare; i++) {
 					for (int j = 0; j < sudoku.sizeSquare; j++) {
-						int minConflicts = Integer.MAX_VALUE;
-						Sudoku bestSudoku = null;
-						
-						for (int k = 0; k < sudoku.sizeSquare; k++) {
-							Sudoku tmpSudoku = sudoku.clone();
-							int tmpVal = tmpSudoku.matrix[i][j];
-							tmpSudoku.matrix[i][j] = tmpSudoku.matrix[i][k];
-							tmpSudoku.matrix[i][k] = tmpVal;
+						if (!sudoku.fixed[i][j]) {
+							int minConflicts = Integer.MAX_VALUE;
+							Sudoku bestSudoku = null;
 							
-							int tmpConflicts = heuristic(tmpSudoku);
-							if (tmpConflicts < minConflicts) {
-								minConflicts = tmpConflicts;
-								bestSudoku = tmpSudoku;
+							for (int k = 0; k < sudoku.sizeSquare; k++) {
+								if (!sudoku.fixed[i][k]) {
+									Sudoku tmpSudoku = sudoku.clone();
+									int tmpVal = tmpSudoku.matrix[i][j];
+									tmpSudoku.matrix[i][j] = tmpSudoku.matrix[i][k];
+									tmpSudoku.matrix[i][k] = tmpVal;
+									
+									int tmpConflicts = heuristic(tmpSudoku);
+									if (tmpConflicts < minConflicts) {
+										minConflicts = tmpConflicts;
+										bestSudoku = tmpSudoku;
+									}
+								}
 							}
+							
+							sudoku = bestSudoku;
 						}
-						
-						sudoku = bestSudoku;
 					}
 				}
 				
