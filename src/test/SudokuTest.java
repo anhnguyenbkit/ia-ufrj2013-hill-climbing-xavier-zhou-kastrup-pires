@@ -14,16 +14,37 @@ public class SudokuTest {
 
 	@Test
 	public void sudokuTest() throws IOException {
+		System.out.println("TESTE DO HARD =================================================================================");
+		testExample("test/Hard_input.txt","test/Hard_output.txt");
+		System.out.println("\n Só pra lembrar... este foi o hard");
 		
-		String fileIn = classLoader.getResource("test/Hard_input.txt").getFile();
+		System.out.println("\n TESTE DO EASY ===================================================================================");
+		testExample("test/Easy_input.txt","test/Easy_output.txt");
+		System.out.println("\n Só pra lembrar... este foi o easy");
+		
+		System.out.println("\n TESTE DO NORMAL ================================================================================");
+		testExample("test/Normal_input.txt","test/Normal_output.txt");
+		System.out.println("\n Só pra lembrar... este foi o normal");
+		
+		System.out.println("\n TESTE DO SUPERHARD =====================================================================================");
+		testExample("test/SuperHard_input.txt","test/SuperHard_output.txt");
+		System.out.println("\n Só pra lembrar... este foi o superhard");
+
+//		System.out.println("\n TESTE DO BEGINNER =================================================================================");
+//		testExample("test/Beginners_input.txt","test/Beginners_output.txt");
+//		System.out.println("\n Só pra lembrar... este foi o beginner");
+	}
+	
+	public void testExample(String inputFile, String outputFile) throws IOException{
+		
+		String fileIn = classLoader.getResource(inputFile).getFile();
 		Sudoku sudokuIn = Sudoku.readSudoku(fileIn);
 
-		String fileOut = classLoader.getResource("test/Hard_output.txt").getFile();
+		String fileOut = classLoader.getResource(outputFile).getFile();
 		Sudoku sudokuOut = Sudoku.readSudoku(fileOut);
 		
 		SudokuSolver solver = new SudokuSolver(sudokuIn);
 		Sudoku sudokuSolution = solver.solve();
-		
 		Assert.assertEquals(sudokuOut, sudokuSolution);
 	}
 	
