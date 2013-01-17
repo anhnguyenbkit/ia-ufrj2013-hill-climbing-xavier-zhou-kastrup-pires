@@ -12,41 +12,36 @@ public class Sudoku {
 	
 	public Sudoku(int n) {
 		this.size = n;
+		this.sizeSquare = n*n;
 		this.matrix = new int[size][size];
 	}
 	
-	public Sudoku(String fileName) {
-		try {
-			FileReader fileReader = new FileReader(fileName);
-			BufferedReader input = new BufferedReader(fileReader);
-			
-			String inputLine = input.readLine();
-			String[] split = inputLine.split(" ");
-			if (split.length != 1) {
-				input.close();
-				throw new IllegalStateException("Formato de arquivo inv√°lido.");
-			}
-			this.size = Integer.parseInt(split[0]);
-			this.sizeSquare = this.size * this.size;
-			this.matrix = new int[sizeSquare][sizeSquare];
-			
-			while (input.ready()) {
-				inputLine = input.readLine();
-				split = inputLine.split(" ");
-				if (split.length != 3) {
-					input.close();
-					throw new IllegalStateException("Formato de arquivo inv√°lido.");
-				}
-				int row = Integer.parseInt(split[0]);
-				int col = Integer.parseInt(split[1]);
-				int value = Integer.parseInt(split[2]);
-				this.matrix[row][col] = value;
-			}
-			
+	public static Sudoku readSudoku(String fileName) throws IOException {
+		FileReader fileReader = new FileReader(fileName);
+		BufferedReader input = new BufferedReader(fileReader);
+		
+		String inputLine = input.readLine();
+		String[] split = inputLine.split(" ");
+		if (split.length != 1) {
 			input.close();
-		} catch (IOException e) {
-			System.out.println("Erro ao ler o arquivo '"+fileName+"'.");
+			throw new IllegalStateException("Formato de arquivo inv·lido.");
 		}
+		Sudoku sudoku = new Sudoku(Integer.parseInt(split[0]));
+		
+		for (int i = 0; i < sudoku.sizeSquare; i++) {
+			inputLine = input.readLine();
+			split = inputLine.split(" ");
+			if (split.length != sudoku.sizeSquare) {
+				input.close();
+				throw new IllegalStateException("Formato de arquivo inv·lido.");
+			}
+			for (int j = 0; j < sudoku.sizeSquare; j++)
+				sudoku.matrix[i][j] = Integer.parseInt(split[j]);
+		}
+		
+		input.close();
+		
+		return sudoku;
 	}
 	
 	public Sudoku clone() {
