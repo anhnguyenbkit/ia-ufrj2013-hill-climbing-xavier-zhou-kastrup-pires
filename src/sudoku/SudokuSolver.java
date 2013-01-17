@@ -10,7 +10,7 @@ public class SudokuSolver {
 		this.initialSudoku = sudoku;
 	}
 
-	public int heuristic(Sudoku state) {
+	public static int heuristic(Sudoku state) {
 		int conflicts = 0;
 		
 		// Varre cada coluna
@@ -68,7 +68,7 @@ public class SudokuSolver {
 
 		while (true) {
 			if (++countLoops == 1)
-				System.out.println("Começou a resolver.");
+				System.out.println("Comeï¿½ou a resolver.");
 			else
 				System.out.println("Reiniciou o estado inicial.");
 			

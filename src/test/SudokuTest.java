@@ -11,37 +11,32 @@ import sudoku.SudokuSolver;
 
 public class SudokuTest {
 
+	ClassLoader classLoader = SudokuTest.class.getClassLoader();
+
 	@Test
 	public void sudokuTest() throws IOException {
 		
-		Scanner scanner = new Scanner(System.in);
-		
-		System.out.println("Caminho do arquivo de entrada: ");
-		Sudoku sudokuIn = Sudoku.readSudoku(scanner.nextLine());
-		
-		System.out.println("Caminho do arquivo de resposta: ");
-		Sudoku sudokuOut = Sudoku.readSudoku(scanner.nextLine());
+		String fileIn = classLoader.getResource("test/Hard_input.txt").getFile();
+		Sudoku sudokuIn = Sudoku.readSudoku(fileIn);
+
+		String fileOut = classLoader.getResource("test/Hard_output.txt").getFile();
+		Sudoku sudokuOut = Sudoku.readSudoku(fileOut);
 		
 		SudokuSolver solver = new SudokuSolver(sudokuIn);
 		Sudoku sudokuSolution = solver.solve();
 		
-		Assert.assertEquals(sudokuSolution, sudokuOut);
-		
+		Assert.assertEquals(sudokuOut, sudokuSolution);
 	}
 	
 	@Test
 	public void heuristicsTest() throws IOException {
 		
-		Scanner scanner = new Scanner(System.in);
+		String solutionFile = classLoader.getResource("test/Hard_output.txt").getFile();
+		Sudoku sudokuSolution = Sudoku.readSudoku(solutionFile);
 		
-		System.out.println("Caminho do arquivo para testar a heurística: ");
-		Sudoku solutionExample = Sudoku.readSudoku(scanner.nextLine());
+		int foundConflicts = SudokuSolver.heuristic(sudokuSolution);
 		
-		SudokuSolver solver = new SudokuSolver(solutionExample);
-		int foundConflicts = solver.heuristic(solutionExample);
-		
-		Assert.assertEquals(foundConflicts, 0);
-		
+		Assert.assertEquals(0, foundConflicts);
 	}
 	
 	@Test
@@ -49,7 +44,7 @@ public class SudokuTest {
 		
 		Scanner scanner = new Scanner(System.in);
 		
-		System.out.println("Caminho do arquivo para testar a heurística: ");
+		System.out.println("Caminho do arquivo para testar a heurï¿½stica: ");
 		Sudoku solutionWrongExample = Sudoku.readSudoku(scanner.nextLine());
 		
 		SudokuSolver solver = new SudokuSolver(solutionWrongExample);
