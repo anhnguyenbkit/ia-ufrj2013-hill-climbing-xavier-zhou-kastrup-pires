@@ -3,6 +3,7 @@ package sudoku;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Sudoku {
 	
@@ -24,7 +25,7 @@ public class Sudoku {
 		String[] split = inputLine.split(" ");
 		if (split.length != 1) {
 			input.close();
-			throw new IllegalStateException("Formato de arquivo inválido.");
+			throw new IllegalStateException("Formato de arquivo invï¿½lido.");
 		}
 		Sudoku sudoku = new Sudoku(Integer.parseInt(split[0]));
 		
@@ -33,7 +34,7 @@ public class Sudoku {
 			split = inputLine.split(" ");
 			if (split.length != sudoku.sizeSquare) {
 				input.close();
-				throw new IllegalStateException("Formato de arquivo inválido.");
+				throw new IllegalStateException("Formato de arquivo invï¿½lido.");
 			}
 			for (int j = 0; j < sudoku.sizeSquare; j++)
 				sudoku.matrix[i][j] = Integer.parseInt(split[j]);
@@ -53,5 +54,33 @@ public class Sudoku {
 		
 		return sudokuClone;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(matrix);
+		result = prime * result + size;
+		result = prime * result + sizeSquare;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Sudoku other = (Sudoku) obj;
+		if (!Arrays.deepEquals(matrix, other.matrix))
+			return false;
+		if (size != other.size)
+			return false;
+		if (sizeSquare != other.sizeSquare)
+			return false;
+		return true;
+	}	
 
 }
