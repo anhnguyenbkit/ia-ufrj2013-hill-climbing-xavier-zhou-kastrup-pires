@@ -67,10 +67,7 @@ public class SudokuSolver {
 		int countLoops = 0;
 
 		while (true) {
-			if (++countLoops == 1)
-				System.out.println("Come�ou a resolver.");
-			else
-				System.out.println("Reiniciou o estado inicial.");
+			++countLoops;
 			
 			sudoku = getInitialState(initialSudoku);
 			int conflicts = heuristic(sudoku);
