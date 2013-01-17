@@ -14,25 +14,38 @@ public class SudokuTest {
 
 	@Test
 	public void sudokuTest() throws IOException {
-		System.out.println("TESTE DO HARD =================================================================================");
-		testExample("test/Hard_input.txt","test/Hard_output.txt");
-		System.out.println("\n Só pra lembrar... este foi o hard");
+		System.out.println("TESTE DO 4 x 4 EASY =================================================================================");
+		testExample("test/Easy4x4_input.txt", "test/Easy4x4_output.txt");
 		
-		System.out.println("\n TESTE DO EASY ===================================================================================");
-		testExample("test/Easy_input.txt","test/Easy_output.txt");
-		System.out.println("\n Só pra lembrar... este foi o easy");
-		
-		System.out.println("\n TESTE DO NORMAL ================================================================================");
-		testExample("test/Normal_input.txt","test/Normal_output.txt");
-		System.out.println("\n Só pra lembrar... este foi o normal");
-		
-		System.out.println("\n TESTE DO SUPERHARD =====================================================================================");
-		testExample("test/SuperHard_input.txt","test/SuperHard_output.txt");
-		System.out.println("\n Só pra lembrar... este foi o superhard");
+		System.out.println("TESTE DO 4 x 4 SIMPLE =================================================================================");
+		testExample("test/Simple4x4_input.txt", "test/Simple4x4_output.txt");
 
-//		System.out.println("\n TESTE DO BEGINNER =================================================================================");
-//		testExample("test/Beginners_input.txt","test/Beginners_output.txt");
-//		System.out.println("\n Só pra lembrar... este foi o beginner");
+		System.out.println("TESTE DO 4 x 4 AVERAGE =================================================================================");
+		testExample("test/Average4x4_input.txt", "test/Average4x4_output.txt");
+		
+		System.out.println("TESTE DO 4 x 4 MEDIUM =================================================================================");
+		testExample("test/Medium4x4_input.txt", "test/Medium4x4_output.txt");
+		
+		System.out.println("TESTE DO 4 x 4 HARD =================================================================================");
+		testExample("test/Hard4x4_input.txt", "test/Hard4x4_output.txt");
+		
+		System.out.println("TESTE DO 9 x 9 BEGINNER ===================================================================================");
+		testExample("test/Beginners_input.txt", "test/Beginners_output.txt");
+		
+		System.out.println("TESTE DO 9 x 9 EASY ===================================================================================");
+		testExample("test/Easy_input.txt", "test/Easy_output.txt");
+		
+		System.out.println("TESTE DO 9 x 9 NORMAL ================================================================================");
+		testExample("test/Normal_input.txt", "test/Normal_output.txt");
+
+		System.out.println("TESTE DO 9 x 9 HARD =================================================================================");
+		testExample("test/Hard_input.txt", "test/Hard_output.txt");
+	}
+	
+	@Test
+	public void sudokuTestSuperHard() throws IOException {
+		System.out.println("TESTE DO 9 x 9 SUPERHARD =====================================================================================");
+		testExample("test/SuperHard_input.txt", "test/SuperHard_output.txt");
 	}
 	
 	public void testExample(String inputFile, String outputFile) throws IOException{
@@ -56,6 +69,11 @@ public class SudokuTest {
 		heuristicTest(0, "test/Normal_output.txt");
 		heuristicTest(0, "test/SuperHard_output.txt");
 		heuristicTest(0, "test/test_output.txt");
+		heuristicTest(0, "test/Average4x4_output.txt");
+		heuristicTest(0, "test/Easy4x4_output.txt");
+		heuristicTest(0, "test/Hard4x4_output.txt");
+		heuristicTest(0, "test/Medium4x4_output.txt");
+		heuristicTest(0, "test/Simple4x4_output.txt");
 	}
 
 	@Test
