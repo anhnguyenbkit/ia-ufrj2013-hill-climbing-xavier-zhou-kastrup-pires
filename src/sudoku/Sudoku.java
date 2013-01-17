@@ -64,6 +64,20 @@ public class Sudoku {
 		
 		return sudokuClone;
 	}
+	
+	public String toString() {
+		String str = "";
+		
+		for (int i = 0; i < this.sizeSquare; i++) {
+			str += this.matrix[i][0];
+			for (int j = 1; j < this.sizeSquare; j++) {
+				str += this.matrix[i][j];
+			}
+			str += "\n";
+		}
+		
+		return str;
+	}
 
 	@Override
 	public int hashCode() {
