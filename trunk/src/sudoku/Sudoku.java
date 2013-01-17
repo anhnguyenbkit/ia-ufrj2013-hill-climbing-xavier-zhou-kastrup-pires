@@ -71,7 +71,7 @@ public class Sudoku {
 		for (int i = 0; i < this.sizeSquare; i++) {
 			str += this.matrix[i][0];
 			for (int j = 1; j < this.sizeSquare; j++) {
-				str += this.matrix[i][j];
+				str += " " + this.matrix[i][j];
 			}
 			str += "\n";
 		}

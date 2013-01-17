@@ -2,15 +2,47 @@ package sudoku;
 
 import java.util.Random;
 
-public class SudokuSolver2 extends SudokuSolver {
+public class SudokuSolver2 {
 
-	public SudokuSolver2(Sudoku sudoku) {
-		super(sudoku);
+	Sudoku2 initialSudoku;
+	
+	public SudokuSolver2(Sudoku2 sudoku) {
+		this.initialSudoku = sudoku;
 	}
 	
-	public Sudoku getInitialState(Sudoku sudoku) {
+	public static int heuristic(Sudoku state) {
+		int conflicts = 0;
+		
+		// Varre cada coluna
+		for (int i = 0; i < state.sizeSquare; i++) {
+			int[] freq = new int[state.sizeSquare];
+			for (int j = 0; j < state.sizeSquare; j++) {
+				if (++freq[state.matrix[j][i] - 1] > 1)
+					conflicts++;
+			}
+		}
+		
+		// Varre cada quadrado
+		for (int i = 0; i < state.size; i++) {
+			for (int j = 0; j < state.size; j++) {
+				int[] freq = new int[state.sizeSquare];
+				for (int k = state.size*i; k < state.size*(i+1); k++) {
+					for (int l = state.size*j; l < state.size*(j+1); l++) {
+						if (++freq[state.matrix[k][l] - 1] > 1)
+							conflicts++;
+					}
+				}
+			}
+		}
+		
+		return conflicts;
+	}
+	
+	public Sudoku2 getInitialState(Sudoku2 sudoku) {
 		Random random = new Random();
-		Sudoku initialState = sudoku.clone();
+		Sudoku2 initialState = sudoku.clone();
+		
+		initialState.updateAvailableValues();
 		
 		for (int i = 0; i < initialState.sizeSquare; i++) {
 			boolean[] used = new boolean[initialState.sizeSquare];
@@ -24,7 +56,7 @@ public class SudokuSolver2 extends SudokuSolver {
 					while (used[val])
 						val = random.nextInt(initialState.sizeSquare);
 					used[val] = true;
-					initialState.matrix[i][j] = val + 1;
+					initialState.assign(val+1, i, j, false);
 				}
 			}
 		}
@@ -32,17 +64,19 @@ public class SudokuSolver2 extends SudokuSolver {
 		return initialState;
 	}
 	
-	public Sudoku solve() {
-		Sudoku sudoku = null;
+	public Sudoku2 solve() {
+		System.out.println("Problema:");
+		System.out.println(initialSudoku);
+		
+		Sudoku2 sudoku = null;
 		int countLoops = 0;
 
 		while (true) {
-			if (++countLoops == 1)
-				System.out.println("Comeï¿½ou a resolver.");
-			else
-				System.out.println("Reiniciou o estado inicial.");
+			++countLoops;
 			
 			sudoku = getInitialState(initialSudoku);
+			sudoku.updateAvailableValues();
+			
 			int conflicts = heuristic(sudoku);
 			
 			while (conflicts != 0) {
@@ -50,11 +84,11 @@ public class SudokuSolver2 extends SudokuSolver {
 					for (int j = 0; j < sudoku.sizeSquare; j++) {
 						if (!sudoku.fixed[i][j]) {
 							int minConflicts = Integer.MAX_VALUE;
-							Sudoku bestSudoku = null;
+							Sudoku2 bestSudoku = null;
 							
 							for (int k = 0; k < sudoku.sizeSquare; k++) {
 								if (!sudoku.fixed[i][k]) {
-									Sudoku tmpSudoku = sudoku.clone();
+									Sudoku2 tmpSudoku = sudoku.clone();
 									int tmpVal = tmpSudoku.matrix[i][j];
 									tmpSudoku.matrix[i][j] = tmpSudoku.matrix[i][k];
 									tmpSudoku.matrix[i][k] = tmpVal;
@@ -70,6 +104,7 @@ public class SudokuSolver2 extends SudokuSolver {
 							sudoku = bestSudoku;
 						}
 					}
+					//sudoku.updateAvailableValues();
 				}
 				
 				int actualConflicts = heuristic(sudoku);
@@ -80,8 +115,13 @@ public class SudokuSolver2 extends SudokuSolver {
 			}
 			
 			if (conflicts == 0) {
-				System.out.println("Resolvido!");
-				System.out.println("Precisou rodar o algoritmo " + countLoops + " vezes.");
+				System.out.println("Solução:");
+				System.out.println(sudoku);
+				if (countLoops == 1) {
+					System.out.println("Precisou rodar o algoritmo " + countLoops + " vez.");					
+				} else {
+					System.out.println("Precisou rodar o algoritmo " + countLoops + " vezes.");
+				}
 				break;
 			}
 		}

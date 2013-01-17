@@ -41,7 +41,7 @@ public class Sudoku2 extends Sudoku {
 			for (int j = 0; j < sudoku.sizeSquare; j++) {
 				int val = Integer.parseInt(split[j]);
 				if (val != 0) {
-					sudoku.assign(Integer.parseInt(split[j]), i, j);
+					sudoku.assign(Integer.parseInt(split[j]), i, j, true);
 				}
 			}
 		}
@@ -51,9 +51,9 @@ public class Sudoku2 extends Sudoku {
 		return sudoku;
 	}
 	
-	public void assign(int value, int i, int j) {
-		int boxInitLineIndex = (i / size-1);
-		int boxInitColumIndex = (j / size-1);
+	public void assign(int value, int i, int j, boolean fixed) {
+		int boxInitLineIndex = (i / size) * size;
+		int boxInitColumIndex = (j / size) * size;
 		
 		for (int k = 0; k < sizeSquare; k++) {
 			if (value-1 != k) {
@@ -72,8 +72,8 @@ public class Sudoku2 extends Sudoku {
 			for (int l = 0; l < size; l++) 
 				availableValuesMatrix[boxInitLineIndex+k][boxInitColumIndex+l][value-1] = false;
 		
-		matrix[i][j] = value;		
-		fixed[i][j] = true;
+		matrix[i][j] = value;
+		this.fixed[i][j] = fixed;
 	}
 	
 	public void updateAvailableValues() {
@@ -89,8 +89,42 @@ public class Sudoku2 extends Sudoku {
 						}
 					
 					if (conflicts == 1)
-						assign(lastConflictIndex+1, i, j);	
+						assign(lastConflictIndex+1, i, j, false);	
 				}
+			}
+		}
+	}
+	
+	public void swapLineValues(int i, int j, int k) {
+		int tmpVal = matrix[i][j];
+		matrix[i][j] = matrix[i][k];
+		matrix[i][k] = tmpVal;
+		
+		
+	}
+	
+	private void updateAvailableMatrixCell(int i, int j) {
+		int boxInitLineIndex = (i / size) * size;
+		int boxInitColumIndex = (j / size) * size;
+		int value = matrix[i][j];
+		
+		for (int k = 0; k < sizeSquare; k++) { 
+			availableValuesMatrix[i][j][k] = true;
+		}
+		
+		//percorre a linha e a coluna
+		for (int k = 0; k < sizeSquare; k++) {
+			if (matrix[i][k] != 0) 
+				availableValuesMatrix[i][k][matrix[i][k]-1] = false;
+			if (matrix[k][j] != 0)
+				availableValuesMatrix[k][j][matrix[k][j]-1] = false;
+		}
+		
+		//percorre o box
+		for (int k = 0; k < size; k++) {
+			for (int l = 0; l < size; l++) {
+				int valueIndex = matrix[boxInitLineIndex+k][boxInitColumIndex+l]-1;
+				availableValuesMatrix[boxInitLineIndex+k][boxInitColumIndex+l][valueIndex] = false;				
 			}
 		}
 	}
