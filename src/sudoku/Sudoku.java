@@ -14,7 +14,7 @@ public class Sudoku {
 	public Sudoku(int n) {
 		this.size = n;
 		this.sizeSquare = n*n;
-		this.matrix = new int[size][size];
+		this.matrix = new int[sizeSquare][sizeSquare];
 	}
 	
 	public static Sudoku readSudoku(String fileName) throws IOException {
