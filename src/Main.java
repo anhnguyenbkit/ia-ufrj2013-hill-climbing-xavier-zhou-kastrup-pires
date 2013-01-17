@@ -1,8 +1,5 @@
 import java.io.IOException;
-import java.util.Scanner;
 
-import sudoku.Sudoku;
-import sudoku.SudokuSolver;
 import test.SudokuTest;
 
 public class Main {
