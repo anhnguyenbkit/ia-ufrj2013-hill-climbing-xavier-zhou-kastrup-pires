@@ -27,7 +27,7 @@ public class SudokuSolver {
 			for (int j = 0; j < state.size; j++) {
 				int[] freq = new int[state.sizeSquare];
 				for (int k = state.size*i; k < state.size*(i+1); k++) {
-					for (int l = state.size*j; l < state.size*(j+1); j++) {
+					for (int l = state.size*j; l < state.size*(j+1); l++) {
 						if (++freq[state.matrix[k][l] - 1] > 1)
 							conflicts++;
 					}
@@ -78,23 +78,27 @@ public class SudokuSolver {
 			while (conflicts != 0) {
 				for (int i = 0; i < sudoku.sizeSquare; i++) {
 					for (int j = 0; j < sudoku.sizeSquare; j++) {
-						int minConflicts = Integer.MAX_VALUE;
-						Sudoku bestSudoku = null;
-						
-						for (int k = 0; k < sudoku.sizeSquare; k++) {
-							Sudoku tmpSudoku = sudoku.clone();
-							int tmpVal = tmpSudoku.matrix[i][j];
-							tmpSudoku.matrix[i][j] = tmpSudoku.matrix[i][k];
-							tmpSudoku.matrix[i][k] = tmpVal;
+						if (!sudoku.fixed[i][j]) {
+							int minConflicts = Integer.MAX_VALUE;
+							Sudoku bestSudoku = null;
 							
-							int tmpConflicts = heuristic(tmpSudoku);
-							if (tmpConflicts < minConflicts) {
-								minConflicts = tmpConflicts;
-								bestSudoku = tmpSudoku;
+							for (int k = 0; k < sudoku.sizeSquare; k++) {
+								if (!sudoku.fixed[i][k]) {
+									Sudoku tmpSudoku = sudoku.clone();
+									int tmpVal = tmpSudoku.matrix[i][j];
+									tmpSudoku.matrix[i][j] = tmpSudoku.matrix[i][k];
+									tmpSudoku.matrix[i][k] = tmpVal;
+									
+									int tmpConflicts = heuristic(tmpSudoku);
+									if (tmpConflicts < minConflicts) {
+										minConflicts = tmpConflicts;
+										bestSudoku = tmpSudoku;
+									}
+								}
 							}
+							
+							sudoku = bestSudoku;
 						}
-						
-						sudoku = bestSudoku;
 					}
 				}
 				
