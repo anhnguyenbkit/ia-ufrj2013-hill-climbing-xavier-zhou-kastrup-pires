@@ -10,11 +10,13 @@ public class Sudoku {
 	public int size;
 	public int sizeSquare;
 	public int[][] matrix;
+	public boolean[][] fixed;
 	
 	public Sudoku(int n) {
 		this.size = n;
 		this.sizeSquare = n*n;
 		this.matrix = new int[sizeSquare][sizeSquare];
+		this.fixed = new boolean[sizeSquare][sizeSquare];
 	}
 	
 	public static Sudoku readSudoku(String fileName) throws IOException {
@@ -36,8 +38,13 @@ public class Sudoku {
 				input.close();
 				throw new IllegalStateException("Formato de arquivo inv�lido.");
 			}
-			for (int j = 0; j < sudoku.sizeSquare; j++)
-				sudoku.matrix[i][j] = Integer.parseInt(split[j]);
+			for (int j = 0; j < sudoku.sizeSquare; j++) {
+				int val = Integer.parseInt(split[j]);
+				if (val != 0) {
+					sudoku.matrix[i][j] = Integer.parseInt(split[j]);
+					sudoku.fixed[i][j] = true;
+				}
+			}
 		}
 		
 		input.close();
@@ -48,9 +55,12 @@ public class Sudoku {
 	public Sudoku clone() {
 		Sudoku sudokuClone = new Sudoku(this.size);
 		
-		for (int i = 0; i < this.sizeSquare; i++)
-			for (int j = 0; j < this.sizeSquare; j++)
+		for (int i = 0; i < this.sizeSquare; i++) {
+			for (int j = 0; j < this.sizeSquare; j++) {
 				sudokuClone.matrix[i][j] = this.matrix[i][j];
+				sudokuClone.fixed[i][j] = this.fixed[i][j];
+			}
+		}
 		
 		return sudokuClone;
 	}
