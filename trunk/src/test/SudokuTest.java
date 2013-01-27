@@ -66,7 +66,7 @@ public class SudokuTest {
 		testExample("test/SuperHard_input.txt", "test/SuperHard_output.txt");
 	}
 	
-	@Test
+	/*@Test
 	public void sudokuTestEmptyN3() throws IOException {
 		System.out.println("\nTESTE DO 9 x 9 VAZIO =====================================================================================");
 		testExample("test/Empty_input.txt", "test/Empty_output.txt");
@@ -76,7 +76,7 @@ public class SudokuTest {
 	public void sudokuTestEmptyN4() throws IOException {
 		System.out.println("\nTESTE DO 16 x 16 VAZIO =====================================================================================");
 		testExample("test/Empty16x16_input.txt", "test/Empty16x16_output.txt");
-	}
+	}*/
 	
 	public void testExample(String inputFile, String outputFile) throws IOException{
 		

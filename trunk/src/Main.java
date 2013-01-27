@@ -17,12 +17,12 @@ public class Main {
 			String path = scanner.nextLine();
 			Sudoku sudoku = Sudoku.readSudoku(path);
 			
-			System.out.println("Resolução pelo Hill Climbing: ");
+			System.out.println("ResoluÃ§Ã£o pelo Hill Climbing: ");
 			SudokuSolver solver = new SudokuSolver(sudoku);
 			solver.solve();
 			
 			Sudoku2 sudoku2 = Sudoku2.readSudoku(path);
-			System.out.println("Resolução pelo Hill Climbing com Constraint Propagation: ");
+			System.out.println("\n\nResoluÃ§Ã£o pelo Hill Climbing com Constraint Propagation: ");
 			SudokuSolver2 solver2 = new SudokuSolver2(sudoku2);
 			solver2.solve();
 			

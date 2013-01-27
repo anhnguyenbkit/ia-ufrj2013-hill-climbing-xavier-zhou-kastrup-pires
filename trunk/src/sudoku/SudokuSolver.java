@@ -110,7 +110,7 @@ public class SudokuSolver {
 			}
 			
 			if (conflicts == 0) {
-				System.out.println("Solução:");
+				System.out.println("SoluÃ§Ã£o:");
 				System.out.println(sudoku);
 				if (countLoops == 1) {
 					System.out.println("Precisou rodar o algoritmo " + countLoops + " vez.");					
